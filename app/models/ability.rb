@@ -8,9 +8,9 @@ class Ability
          can :manage, :all
        #elsif (user.roles.present?)&&(user.roles.first.name == "logined_user")
          #can [:create, :read, :update], :all
-         #can [:read, :update], Review
+         #can [:read, :update, :delete], Report
        else
-         can :read, :all
+         #can :read, :all
        end
     # Define abilities for the passed in user here. For example:
     #

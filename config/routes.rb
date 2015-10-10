@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  resources :reports
+  
+  
+
+  
   devise_for :users
+
+  get 'reports/my_reports' => "reports#my_reports"
   resources :projects
+
+  resources :reports
 
   root 'projects#index'
 
