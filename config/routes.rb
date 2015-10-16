@@ -3,12 +3,14 @@ Rails.application.routes.draw do
   
 
   
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "users/registrations"}
 
   get 'reports/my_reports' => "reports#my_reports"
   resources :projects
 
   resources :reports
+
+  get 'users', to: 'users#index'
 
   root 'projects#index'
 
