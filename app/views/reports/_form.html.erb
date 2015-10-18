@@ -11,16 +11,64 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :comment %><br>
-    <%= f.text_field :comment %>
+  <div class="form-group">
+    <%= f.label :day_off, class: 'col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' %>
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :day_off %>
+        </label>
+      </div>
+    </div>
   </div>
+
+  <div class="form-group">
+      <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">Date</label>
+      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+        <input type="text" class='datepicker'>
+      </div>
+    </div>
+
+  <div id = "date_area">
+    <div class="form-group">
+      <%= f.label :time_start, class: 'col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' %>
+      <%= f.time_select :time_start, class: 'btn-default btn-xs' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :time_end, class: 'col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' %>
+      <%= f.time_select :time_end, class: 'btn-default btn-xs' %>
+    </div>
+  </div>
+
+  
   <div class="field">
     <%= f.label :project_id %><br>
     <%= select_tag 'report[project_id]', options_from_collection_for_select(Project.all, 'id', 'name') %>
   </div>
+
+  <div class="field">
+    <%= f.label :comment %><br>
+    <%= f.text_field :comment %>
+  </div>
+
+  <%= hidden_field( :report, :date) %>
   <%= hidden_field_tag :user_id, current_user.id%>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit id: "report_submit"%>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $('#report_submit').click(function(){
+    var date = $('.datepicker').val()
+    $('[name="report[date]"]').val(date);
+  });
+
+  $('#report_day_off').change(function() {
+    $('#date_area').toggle(!this.checked);
+  });
+
+  $('.datepicker').datepicker();
+
+</script>

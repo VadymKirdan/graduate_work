@@ -7,8 +7,35 @@
 
 <p>
   <strong>Project:</strong>
-  <%= @report.project_id %>
+  <%= @report.project.name %>
 </p>
+
+<p>
+  <strong>User:</strong>
+  <%= @report.user.first_name %> <%= @report.user.last_name %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @report.date %>
+</p>
+
+<p>
+  <strong>Start Time :</strong>
+  <%= @report.time_start.hour %> : <%= @report.time_start.min %>
+</p>
+
+<p>
+  <strong>End Time :</strong>
+  <%= @report.time_end.hour %> : <%= @report.time_end.min %>
+</p>
+
+<p>
+  <strong>Total Time:</strong>
+  <%= @report.total_time %> hr
+</p>
+
+
 
 
 <%= link_to 'Edit', edit_report_path(@report) %> |

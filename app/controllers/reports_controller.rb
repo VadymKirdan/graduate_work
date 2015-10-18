@@ -1,4 +1,5 @@
 class ReportsController < ApplicationController
+
   before_action :set_report, only: [:show, :edit, :update, :destroy]
 
   # GET /reports
@@ -26,6 +27,11 @@ class ReportsController < ApplicationController
   def create
     @report = Report.new(report_params)
     @report.user_id = params[:user_id]
+    if @report.day_off == true
+      @report.time_start = nil
+      @report.time_end = nil
+    end
+    @report.total_time = ((@report.time_end - @report.time_start) / 3600).round(2)
     respond_to do |format|
       if @report.save
         format.html { redirect_to @report, notice: 'Report was successfully created.' }
@@ -73,6 +79,6 @@ class ReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
-      params.require(:report).permit(:comment, :project_id, :user_id)
+      params.require(:report).permit(:comment, :project_id, :user_id, :day_off, :time_start, :time_end, :date)
     end
 end

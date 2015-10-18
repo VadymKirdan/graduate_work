@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem "therubyracer"
 gem "less-rails" 
 gem "twitter-bootstrap-rails"
+gem 'bootstrap-datepicker-rails'
+gem 'time_diff', '~> 0.3.0'
 
 gem 'devise'
 gem "cancan"
