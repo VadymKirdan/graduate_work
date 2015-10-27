@@ -1,5 +1,5 @@
 class SalariesController < ApplicationController
-  #before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_salary, only: [:show, :edit, :update, :destroy]
 
   # GET /projects
   # GET /projects.json
@@ -9,8 +9,8 @@ class SalariesController < ApplicationController
 
   # GET /projects/1
   # GET /projects/1.json
-  # def show
-  # end
+  def show
+  end
 
   # GET /projects/new
   # def new
@@ -61,14 +61,18 @@ class SalariesController < ApplicationController
   #   end
   # end
 
-  #private
+  def my_salary
+    @salary = Salary.where("user_id = ?", current_user.id).first
+  end
+
+  private
     # Use callbacks to share common setup or constraints between actions.
-    #def set_project
-      #@project = Project.find(params[:id])
-    #end
+    def set_salary
+      @salary = Salary.find(params[:id])
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    #def project_params
-      #params.require(:project).permit(:name, :status, :description)
-    #end
+    def salary_params
+      params.require(:salary).permit(:current_balance, :total_balance, :user_id)
+    end
 end
