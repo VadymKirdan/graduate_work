@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :projects
 
   resources :reports
+  resources :salaries
 
   get 'users', to: 'users#index'
 

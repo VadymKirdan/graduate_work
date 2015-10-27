@@ -30,8 +30,10 @@ class ReportsController < ApplicationController
     if @report.day_off == true
       @report.time_start = nil
       @report.time_end = nil
+      @report.total_time = nil
+    else
+      @report.total_time = ((@report.time_end - @report.time_start) / 3600).round(2)
     end
-    @report.total_time = ((@report.time_end - @report.time_start) / 3600).round(2)
     respond_to do |format|
       if @report.save
         format.html { redirect_to @report, notice: 'Report was successfully created.' }

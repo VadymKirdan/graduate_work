@@ -22,17 +22,30 @@
 
 <p>
   <strong>Start Time :</strong>
-  <%= @report.time_start.hour %> : <%= @report.time_start.min %>
+  <% if @report.time_start%>
+  	<%= @report.time_start.hour %> : <%= @report.time_start.min %>
+  <% else %>
+  	=//=
+  <% end %>
 </p>
 
 <p>
   <strong>End Time :</strong>
-  <%= @report.time_end.hour %> : <%= @report.time_end.min %>
+  <% if @report.time_end%>
+  	<%= @report.time_end.hour %> : <%= @report.time_end.min %>
+  <% else %>
+  	=//=
+  <% end %>
 </p>
 
 <p>
   <strong>Total Time:</strong>
-  <%= @report.total_time %> hr
+  <% if @report.total_time%>
+  	<%= @report.total_time %> hr
+  <% else %>
+  	=//=
+  <% end %>
+  
 </p>
 
 
