@@ -63,6 +63,15 @@ class SalariesController < ApplicationController
 
   def my_salary
     @salary = Salary.where("user_id = ?", current_user.id).first
+    @salary.current_balance = 0 
+    @salary.user.reports.each do |report| 
+      if report.total_time 
+         @salary.current_balance += report.total_time 
+      else 
+         @salary.current_balance += 0 
+      end 
+    end 
+    @salary.current_balance = @salary.current_balance.round(2)
   end
 
   private

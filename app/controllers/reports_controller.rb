@@ -30,7 +30,7 @@ class ReportsController < ApplicationController
     if @report.day_off == true
       @report.time_start = nil
       @report.time_end = nil
-      @report.total_time = nil
+      @report.total_time = 0
     else
       @report.total_time = ((@report.time_end - @report.time_start) / 3600).round(2)
     end
@@ -48,6 +48,13 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1
   # PATCH/PUT /reports/1.json
   def update
+    if @report.day_off == true
+      @report.time_start = nil
+      @report.time_end = nil
+      @report.total_time = 0
+    else
+      @report.total_time = ((@report.time_end - @report.time_start) / 3600).round(2)
+    end
     respond_to do |format|
       if @report.update(report_params)
         format.html { redirect_to @report, notice: 'Report was successfully updated.' }
