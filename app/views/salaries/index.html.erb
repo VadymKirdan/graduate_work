@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing All Salaries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Current Balance</th>
+      <th>Total Balance</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @salaries.each do |salary| %>
+      <tr>
+        <td><%= salary.user.first_name %> <%= salary.user.last_name %></td>
+        <td><%= salary.current_balance %></td>
+        <td><%= salary.total_balance %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

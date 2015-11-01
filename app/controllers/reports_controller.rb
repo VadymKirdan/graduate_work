@@ -34,13 +34,17 @@ class ReportsController < ApplicationController
     else
       @report.total_time = ((@report.time_end - @report.time_start) / 3600).round(2)
     end
-    respond_to do |format|
-      if @report.save
-        format.html { redirect_to @report, notice: 'Report was successfully created.' }
-        format.json { render :show, status: :created, location: @report }
-      else
-        format.html { render :new }
-        format.json { render json: @report.errors, status: :unprocessable_entity }
+    if @report.total_time < 0
+      redirect_to :back, flash: {notice: "Wrong time!!!"}
+    else
+      respond_to do |format|
+        if @report.save
+          format.html { redirect_to @report, notice: 'Report was successfully created.' }
+          format.json { render :show, status: :created, location: @report }
+        else
+          format.html { render :new }
+          format.json { render json: @report.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

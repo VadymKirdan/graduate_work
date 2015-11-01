@@ -1,14 +1,10 @@
 class SalariesController < ApplicationController
   before_action :set_salary, only: [:show, :edit, :update, :destroy]
 
-  # GET /projects
-  # GET /projects.json
-  # def index
-  #   @projects = Project.all
-  # end
+  def index
+    @salaries = Salary.all
+  end
 
-  # GET /projects/1
-  # GET /projects/1.json
   def show
   end
 
@@ -72,6 +68,7 @@ class SalariesController < ApplicationController
       end 
     end 
     @salary.current_balance = @salary.current_balance.round(2)
+    @salary.save
   end
 
   private

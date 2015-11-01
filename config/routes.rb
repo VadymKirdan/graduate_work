@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
   
-  
-
-  
   devise_for :users, :controllers => {:registrations => "users/registrations"}
 
   get 'reports/my_reports' => "reports#my_reports"

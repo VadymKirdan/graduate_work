@@ -7,6 +7,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     params.require(:user).permit(:first_name, :last_name, :email, :role_id, :password, :password_confirmation, :current_password)
   end
 
+  def create
+    super do
+      Salary.create(:user_id => @user.id)
+      @user.role_id = 2
+    end
+  end
+
   private :sign_up_params
   private :account_update_params
 
