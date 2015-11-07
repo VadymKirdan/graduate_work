@@ -2,13 +2,12 @@
 
 <h1>Listing All Salaries</h1>
 
-<table>
+<table class="table table-striped table-bordered">
   <thead>
     <tr>
       <th>User</th>
       <th>Current Balance</th>
       <th>Total Balance</th>
-      <th>Chart</th>
     </tr>
   </thead>
 
@@ -20,5 +19,6 @@
         <td><%= salary.total_balance %></td>
       </tr>
     <% end %>
+    <%= bar_chart Salary.group(:current_balance).sum(:current_balance) %>
   </tbody>
 </table>

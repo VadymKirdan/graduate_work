@@ -1,4 +1,4 @@
-<%= form_for(@report) do |f| %>
+<%= form_for(@report, :html => {:class => "form-horizontal"}) do |f| %>
   <% if @report.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being saved:</h2>
@@ -23,39 +23,49 @@
   </div>
 
   <div class="form-group">
-      <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">Date</label>
-      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-        <input type="text" class='datepicker'>
+      <label class="col-lg-2 control-label">Date</label>
+      <div class="col-lg-3">
+        <input type="text" class='datepicker form-control'>
       </div>
     </div>
 
-  <div id = "date_area">
+  <div id="date_area">
     <div class="form-group">
-      <%= f.label :time_start, class: 'col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' %>
-      <%= f.time_select :time_start, class: 'btn-default btn-xs' %>
+      <%= f.label :time_start, class: 'col-lg-2 control-label' %>
+      <div class="col-lg-3">
+        <%= f.time_select :time_start, class: 'btn-default btn-xs' %>
+      </div>
     </div>
     <div class="form-group">
-      <%= f.label :time_end, class: 'col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' %>
-      <%= f.time_select :time_end, class: 'btn-default btn-xs' %>
+      <%= f.label :time_end, class: 'col-lg-2 control-label' %>
+      <div class="col-lg-3">
+        <%= f.time_select :time_end, class: 'btn-default btn-xs' %>
+      </div>
     </div>
   </div>
 
   
-  <div class="field">
-    <%= f.label :project_id %><br>
-    <%= select_tag 'report[project_id]', options_from_collection_for_select(Project.all, 'id', 'name') %>
+  <div class="form-group">
+    <%= f.label :project_id, class: "col-lg-2 control-label" %>
+    <div class="col-lg-3">
+      <%= select_tag 'report[project_id]', options_from_collection_for_select(Project.all, 'id', 'name'), class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :comment %><br>
-    <%= f.text_field :comment %>
+  <div class="form-group">
+    <%= f.label :comment, class: "col-lg-2 control-label" %>
+    <div class="col-lg-3">
+      <%= f.text_field :comment, class: "form-control" %>
+    </div>
   </div>
 
   <%= hidden_field( :report, :date) %>
   <%= hidden_field_tag :user_id, current_user.id%>
 
-  <div class="actions">
-    <%= f.submit id: "report_submit"%>
+  <div class="form-group">
+    <div class="col-lg-10 col-lg-offset-2">
+      <%= f.submit id: "report_submit", class: "btn btn-primary"%>
+    </div>
   </div>
 <% end %>
 
