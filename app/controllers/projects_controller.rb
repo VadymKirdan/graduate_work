@@ -61,6 +61,20 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def make_active
+    @project = Project.where("id = ?", params[:project_id]).first
+    @project.status = true
+    @project.save
+    redirect_to :back
+  end
+
+  def make_unactive
+    @project = Project.where("id = ?", params[:project_id]).first
+    @project.status = false
+    @project.save
+    redirect_to :back
+  end
+
   def active_projects
     @projects = Project.where("status = ?", true)
   end
