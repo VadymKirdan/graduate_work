@@ -61,6 +61,14 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def active_projects
+    @projects = Project.where("status = ?", true)
+  end
+
+  def unactive_projects
+    @projects = Project.where("status = ?", false)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project

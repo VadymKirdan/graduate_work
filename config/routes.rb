@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'reports/my_reports' => "reports#my_reports"
   get 'my_salary' => "salaries#my_salary"
+  post 'active_projects' => "projects#active_projects"
+  post 'unactive_projects' => "projects#unactive_projects"
 
   resources :projects
 

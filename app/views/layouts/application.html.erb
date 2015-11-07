@@ -11,9 +11,8 @@
 
 
 <div class="container">
-	<div class="row">
-		<div class="navbar-default">
-		  <ul class="nav nav-pills navbar-left">
+	<nav class="navbar navbar-inverse">
+		  <ul class="nav navbar-nav">
 			  <% if current_user %>
 			  	<li><%= link_to "Projects", projects_path %></li>
 			  	<% if can? :read, @reports %>
@@ -29,19 +28,32 @@
 		  </ul>
 		  <ul class="nav nav-pills navbar-right">
 				<% if current_user %>
-				  <li><%= current_user.first_name %> <%= current_user.last_name %></li>
-				  <li><%= link_to "My Profile", edit_user_registration_path%> </li>
-				  <li id="right_margin"><%= link_to "Sign out", destroy_user_session_path, :method => :delete %> </li>
+				  <li id="current_user"><%= current_user.first_name %> <%= current_user.last_name %></li>
+				  <li class="top_margin"><%= link_to "My Profile", edit_user_registration_path%> </li>
+				  <li class="top_margin right-margin"><%= link_to "Sign out", destroy_user_session_path, :method => :delete %> </li>
 				<% else %>
-				  <li><%= link_to "Sign up", new_user_registration_path%> </li>
-				  <li id="right_margin"><%= link_to "Sign in", new_user_session_path%> </li>
+				  <li class="top_margin"><%= link_to "Sign up", new_user_registration_path%> </li>
+				  <li class="top_margin right-margin"><%= link_to "Sign in", new_user_session_path%> </li>
 				<% end %>
 	    </ul>
-		</div>
-	</div>
-	
+	</nav>
 	<%= yield %>
 </div>
 
 </body>
 </html>
+
+
+<style type="text/css">
+	.top_margin{
+		margin-top: 6px;
+	}
+	.right-margin{
+		margin-right: 13px;
+	}
+	#current_user{
+		color:white;
+		margin-top: 15px;
+		margin-right: 15px;
+	}
+</style>

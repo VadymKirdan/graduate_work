@@ -48,7 +48,7 @@
   <div class="form-group">
     <%= f.label :project_id, class: "col-lg-2 control-label" %>
     <div class="col-lg-3">
-      <%= select_tag 'report[project_id]', options_from_collection_for_select(Project.all, 'id', 'name'), class: "form-control" %>
+      <%= select_tag 'report[project_id]', options_from_collection_for_select(Project.where("status = ?", true), 'id', 'name'), class: "form-control" %>
     </div>
   </div>
 
