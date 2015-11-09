@@ -3,9 +3,9 @@
 <h1>Listing Projects</h1>
 
 <ul class="nav navbar-nav">
-  <li><%= link_to 'All Projects', { :action => "index", :controller => "projects"}%></li>
-  <li><%= link_to 'Active Projects', { :action => "active_projects", :controller => "projects"},  method: :post %></li>
-  <li><%= link_to 'Unactive projects', { :action => "unactive_projects", :controller => "projects"},  method: :post %></li>
+  <li><%= link_to 'All Projects', { :action => "index", :controller => "projects"}, class: "btn btn-default"%></li>
+  <li><%= link_to 'Active Projects', { :action => "active_projects", :controller => "projects"},  method: :post, class: "btn btn-default" %></li>
+  <li><%= link_to 'Unactive projects', { :action => "unactive_projects", :controller => "projects"},  method: :post, class: "btn btn-default" %></li>
 </ul>
 <br><br><br>
 
@@ -43,6 +43,4 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Project', new_project_path %>
+<%= link_to 'New Project', new_project_path, class: "btn btn-primary" %>
