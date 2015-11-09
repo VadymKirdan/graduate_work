@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super do
       Salary.create(:user_id => @user.id)
-      @user.role_id = 2
+      @user.role_id = 3
     end
   end
 

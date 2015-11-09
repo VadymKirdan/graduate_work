@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   post 'make_active' => "projects#make_active"
   post 'make_unactive' => "projects#make_unactive"
 
+  post 'make_admin' => "users#make_admin"
+  post 'make_user' => "users#back_to_user"
+
 
   resources :projects
 

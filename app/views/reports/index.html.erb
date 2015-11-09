@@ -20,7 +20,7 @@
     <% @reports.each do |report| %>
       <tr>
         <td><%= report.comment %></td>
-        <td><%= report.project_id %></td>
+        <td><%= report.project.name %></td>
         <td><%= report.user.first_name %> <%= report.user.last_name %></td>
         <td><%= report.date %></td>
         <% if report.time_start %>

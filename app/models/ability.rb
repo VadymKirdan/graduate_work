@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
 
     user ||= User.new # guest user (not logged in)
-       if (user.role.present?)&&(user.role.name == 'admin')
+       if user.role.present? && user.role.name == 'super_admin' || user.role.present? && user.role.name == 'admin'
          can :manage, :all
        #elsif (user.roles.present?)&&(user.roles.first.name == "logined_user")
          #can [:create, :read, :update], :all

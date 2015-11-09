@@ -5,6 +5,9 @@
       <th>Name</th>
       <th>Surname</th>
       <th>Email</th>
+      <% if current_user.id == 1%>
+        <th>Change role</th>
+      <% end %>
     </tr>
   </thead>
 
@@ -15,6 +18,15 @@
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
         <td><%= user.email %></td>
+        <% if current_user.id == 1%>
+          <% if user.role_id == 3%>
+            <td><%= link_to 'Make Admin', { :action => "make_admin", :controller => "users", :user_id => user.id},  method: :post %></td>
+          <% elsif user.role_id == 2 %>
+            <td><%= link_to 'Make User', { :action => "back_to_user", :controller => "users", :user_id => user.id},  method: :post %></td>
+          <% elsif user.id == 1 %>
+            <td>Main Admin</td>
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
