@@ -1,0 +1,23 @@
+<p>
+  <strong>First Name:</strong>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <strong>Last Name:</strong>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>Total number of reports:</strong>
+  <%= @user.reports.count %>
+</p>
+
+<p>
+  <strong>Total number of hours:</strong>
+  <% @total_hours = 0%>
+  <% @user.reports.each do |report| %>
+  	<% @total_hours += report.total_time%>
+  <% end %>
+  <%= @total_hours%>
+</p>

@@ -6,6 +6,7 @@
       <th>Surname</th>
       <th>Email</th>
       <th>Role</th>
+      <th>Statistic</th>
       <% if current_user.id == 1%>
         <th>Change role</th>
       <% end %>
@@ -20,6 +21,7 @@
         <td><%= user.last_name %></td>
         <td><%= user.email %></td>
         <td><%= user.role.name%></td>
+        <td><%= link_to 'Show Statistic', { :action => "show_stat", :controller => "users", :user_id => user.id},  method: :post %></td>
         <% if current_user.id == 1%>
           <% if user.role_id == 3%>
             <td class="btn-primary"><%= link_to 'Make Admin', { :action => "make_admin", :controller => "users", :user_id => user.id},  method: :post %></td>

@@ -18,4 +18,8 @@ class UsersController < ApplicationController
     redirect_to :back
   end
 
+  def show_stat
+    @user = User.where("id = ?", params[:user_id]).first
+  end
+
 end

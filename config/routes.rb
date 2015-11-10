@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   devise_for :users, :controllers => {:registrations => "users/registrations"}
 
-  get 'reports/my_reports' => "reports#my_reports"
+  get 'my_reports' => "reports#my_reports"
   get 'my_salary' => "salaries#my_salary"
 
   post 'active_projects' => "projects#active_projects"
@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   post 'make_admin' => "users#make_admin"
   post 'make_user' => "users#back_to_user"
+
+  post 'show_stat' => "users#show_stat"
 
 
   resources :projects
