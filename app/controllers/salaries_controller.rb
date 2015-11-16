@@ -71,6 +71,9 @@ class SalariesController < ApplicationController
     @salary.save
   end
 
+  def submit_salary
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_salary

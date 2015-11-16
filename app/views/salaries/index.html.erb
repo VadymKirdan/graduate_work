@@ -8,6 +8,7 @@
       <th>User</th>
       <th>Current Balance</th>
       <th>Total Balance</th>
+      <th>Submit Salary</th>
     </tr>
   </thead>
 
@@ -17,6 +18,7 @@
         <td><%= salary.user.first_name %> <%= salary.user.last_name %></td>
         <td><%= salary.current_balance %></td>
         <td><%= salary.total_balance %></td>
+        <td><%= link_to 'Submit Salary', { :action => "submit_salary", :controller => "salaries", :salary_id => salary.id},  method: :post, class: "btn btn-default" %></td>
       </tr>
     <% end %>
     <%= bar_chart Salary.group(:current_balance).sum(:current_balance) %>

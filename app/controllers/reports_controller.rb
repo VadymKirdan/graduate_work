@@ -39,6 +39,9 @@ class ReportsController < ApplicationController
       if @report.total_time < 0
         redirect_to :back, flash: {notice: "Wrong time!!!"}
       else
+        if @report.total_time > 8
+          @report.total_time = 8
+        end
         respond_to do |format|
           if @report.save
             format.html { redirect_to @report, notice: 'Report was successfully created.' }
