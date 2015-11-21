@@ -29,6 +29,7 @@ class ReportsController < ApplicationController
     if !@current_day_report.present?
       @report = Report.new(report_params)
       @report.user_id = params[:user_id]
+      @report.paid = false
       if @report.day_off == true
         @report.time_start = nil
         @report.time_end = nil

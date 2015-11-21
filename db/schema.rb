@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151027195958) do
+ActiveRecord::Schema.define(version: 20151121205028) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20151027195958) do
     t.time     "time_start"
     t.time     "time_end"
     t.float    "total_time"
+    t.boolean  "paid"
   end
 
   create_table "roles", force: :cascade do |t|

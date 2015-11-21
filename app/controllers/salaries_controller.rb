@@ -2,6 +2,7 @@ class SalariesController < ApplicationController
   before_action :set_salary, only: [:show, :edit, :update, :destroy]
 
   def index
+    my_salary()
     @salaries = Salary.all
   end
 
@@ -59,19 +60,41 @@ class SalariesController < ApplicationController
 
   def my_salary
     @salary = Salary.where("user_id = ?", current_user.id).first
-    @salary.current_balance = 0 
-    @salary.user.reports.each do |report| 
+    @salary.current_balance = 0
+    @salary.total_balance = 0
+    @salary_paid_reports = @salary.user.reports.where("paid = ?", false)
+    @salary_paid_reports.each do |report| 
       if report.total_time 
          @salary.current_balance += report.total_time 
       else 
          @salary.current_balance += 0 
       end 
-    end 
+    end
+
+    @salary_unpaid_reports = @salary.user.reports.where("paid = ?", true)
+    @salary_unpaid_reports.each do |report| 
+      if report.total_time 
+         @salary.total_balance += report.total_time 
+      else 
+         @salary.total_balance += 0 
+      end 
+    end
+
     @salary.current_balance = @salary.current_balance.round(2)
+    @salary.total_balance = @salary.total_balance.round(2)
     @salary.save
   end
 
   def submit_salary
+    @salary = Salary.where("id = ?", params[:salary_id]).first
+    @salary_user = @salary.user_id
+    @salary_user_reports = Report.where("user_id = ?", @salary_user)
+    @user_unpaid_reports = @salary_user_reports.where("paid = ?", false)
+    @user_unpaid_reports.each do |report|
+      report.paid = true
+      report.save
+    end
+    redirect_to :back
   end
 
   private
@@ -82,6 +105,6 @@ class SalariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def salary_params
-      params.require(:salary).permit(:current_balance, :total_balance, :user_id)
+      params.require(:salary).permit(:current_balance, :total_balance, :user_id, :paid)
     end
 end
