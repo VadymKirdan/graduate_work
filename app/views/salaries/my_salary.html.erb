@@ -15,8 +15,6 @@
   <%= @salary.user.first_name %> <%= @salary.user.last_name %>
 </p>
 
-<%= area_chart Salary.group(:created_at).maximum(:current_balance) %>
-<%= line_chart Salary.group(:current_balance).count %>
 
 
 

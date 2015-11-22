@@ -7,6 +7,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'time_diff', '~> 0.3.0'
 gem "chartkick"
 gem 'groupdate'
+gem 'fusioncharts-rails'
 
 gem 'devise'
 gem "cancan"

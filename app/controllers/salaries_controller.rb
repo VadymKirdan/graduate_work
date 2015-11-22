@@ -4,7 +4,53 @@ class SalariesController < ApplicationController
   def index
     my_salary()
     @salaries = Salary.all
+
+    @salary_data = []
+
+    @salaries.each do |salary|
+      @salary_data.push({
+        :label => salary.user.first_name + " " + salary.user.last_name,
+        :value => salary.current_balance
+      })
+    end
+
+   @chart = Fusioncharts::Chart.new({
+  :height => 400,
+  :width => 1140,
+  :id => 'chart',
+  :type => 'column2d',
+  :renderAt => 'chart-container',
+  :dataSource => {
+    :chart => {
+      :caption => "Current Users Balance",
+      :subCaption => "Harry\'s SuperMart",
+      :xAxisName => "Month",
+      :yAxisName => "Revenues (In USD)",
+      :numberPrefix => "$",
+      :paletteColors => "#0075c2",
+      :bgColor => "#ffffff",
+      :borderAlpha => "20",
+      :canvasBorderAlpha => "0",
+      :usePlotGradientColor => "0",
+      :plotBorderAlpha => "10",
+      :placevaluesInside => "1",
+      :rotatevalues => "1",
+      :valueFontColor => "#ffffff",
+      :showXAxisLine => "1",
+      :xAxisLineColor => "#999999",
+      :divlineColor => "#999999",
+      :divLineDashed => "1",
+      :showAlternateHGridColor => "0",
+      :subcaptionFontBold => "0",
+      :subcaptionFontSize => "14"
+    },
+    :data => @salary_data
+  }
+})
+
   end
+
+
 
   def show
   end
@@ -60,8 +106,11 @@ class SalariesController < ApplicationController
 
   def my_salary
     @salary = Salary.where("user_id = ?", current_user.id).first
+
+    
     @salary.current_balance = 0
     @salary.total_balance = 0
+
     @salary_paid_reports = @salary.user.reports.where("paid = ?", false)
     @salary_paid_reports.each do |report| 
       if report.total_time 

@@ -13,6 +13,7 @@
   </thead>
 
   <tbody>
+  <div id="chart-container"><%= @chart.render() %></div>  
     <% @salaries.each do |salary| %>
       <tr>
         <td><%= salary.user.first_name %> <%= salary.user.last_name %></td>
@@ -21,6 +22,5 @@
         <td><%= link_to 'Submit Salary', { :action => "submit_salary", :controller => "salaries", :salary_id => salary.id},  method: :post, class: "btn btn-default" %></td>
       </tr>
     <% end %>
-    <%= bar_chart Salary.group(:current_balance).sum(:current_balance) %>
   </tbody>
 </table>
