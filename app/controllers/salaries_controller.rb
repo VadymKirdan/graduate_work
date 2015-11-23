@@ -107,7 +107,7 @@ class SalariesController < ApplicationController
   def my_salary
     @salary = Salary.where("user_id = ?", current_user.id).first
 
-    
+
     @salary.current_balance = 0
     @salary.total_balance = 0
 
@@ -129,8 +129,8 @@ class SalariesController < ApplicationController
       end 
     end
 
-    @salary.current_balance = @salary.current_balance.round(2)
-    @salary.total_balance = @salary.total_balance.round(2)
+    @salary.current_balance = (@salary.current_balance * @salary.user.rank.counter).round(2)
+    @salary.total_balance = (@salary.total_balance * @salary.user.rank.counter).round(2)
     @salary.save
   end
 

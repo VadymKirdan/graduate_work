@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 
+  Rank: MyString
+  name: MyString
+  counter: 1
+
+two:
+  name: 
+  Rank: MyString
+  name: MyString
+  counter: 1

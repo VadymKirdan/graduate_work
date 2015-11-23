@@ -11,6 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super do
       Salary.create(:user_id => @user.id)
       @user.role_id = 3
+      @user.rank_id = 1
     end
   end
 
