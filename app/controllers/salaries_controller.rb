@@ -23,9 +23,8 @@ class SalariesController < ApplicationController
   :dataSource => {
     :chart => {
       :caption => "Current Users Balance",
-      :subCaption => "Harry\'s SuperMart",
-      :xAxisName => "Month",
-      :yAxisName => "Revenues (In USD)",
+      :xAxisName => "Users",
+      :yAxisName => "Value",
       :numberPrefix => "$",
       :paletteColors => "#0075c2",
       :bgColor => "#ffffff",

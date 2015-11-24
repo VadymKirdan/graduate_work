@@ -6,9 +6,12 @@
       <th>Surname</th>
       <th>Email</th>
       <th>Role</th>
+      <th>Rank</th>
       <th>Statistic</th>
       <% if current_user.id == 1%>
         <th>Change role</th>
+        <th>Increase rank</th>
+        <th>Decrease rank</th>
       <% end %>
     </tr>
   </thead>
@@ -21,6 +24,7 @@
         <td><%= user.last_name %></td>
         <td><%= user.email %></td>
         <td><%= user.role.name%></td>
+        <td><%= user.rank.name%></td>
         <td><%= link_to 'Show Statistic', { :action => "show_stat", :controller => "users", :user_id => user.id},  method: :post %></td>
         <% if current_user.id == 1%>
           <% if user.role_id == 3%>
@@ -28,8 +32,23 @@
           <% elsif user.role_id == 2 %>
             <td class="btn-primary"><%= link_to 'Make User', { :action => "back_to_user", :controller => "users", :user_id => user.id},  method: :post %></td>
           <% elsif user.id == 1 %>
-            <td class="btn-warning">Main Admin</td>
+            <td>Main Admin</td>
           <% end %>
+
+
+          <% if user.rank_id != 5 %>
+            <td class="btn-success"><%= link_to 'Increase Rank', { :action => "up_rank", :controller => "users", :user_id => user.id}, method: :post %></td>
+          <% else %>
+            <td>Maximum Rank</td>
+          <% end %>
+
+
+            <% if user.rank_id != 1 %>
+            <td class="btn-danger"><%= link_to 'Decrease Rank', { :action => "down_rank", :controller => "users", :user_id => user.id }, method: :post %></td>
+          <% else %>
+            <td>Minimum Rank</td>
+          <% end %>
+     
         <% end %>
       </tr>
     <% end %>
