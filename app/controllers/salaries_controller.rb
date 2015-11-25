@@ -2,7 +2,7 @@ class SalariesController < ApplicationController
   before_action :set_salary, only: [:show, :edit, :update, :destroy]
 
   def index
-    my_salary()
+    all_salaries()
     @salaries = Salary.all
 
     @salary_data = []
@@ -49,7 +49,6 @@ class SalariesController < ApplicationController
   }
 })  
 
-   
 
   end
 
@@ -179,6 +178,36 @@ class SalariesController < ApplicationController
     @salary.current_balance = (@salary.current_balance * @salary.user.rank.counter).round(2)
     @salary.total_balance = (@salary.total_balance * @salary.user.rank.counter).round(2)
     @salary.save
+  end
+
+  def all_salaries
+    @salaries = Salary.all
+
+     @salaries.each do |salary|
+        salary.current_balance = 0
+        salary.total_balance = 0
+
+        @salary_paid_reports = salary.user.reports.where("paid = ?", false)
+        @salary_paid_reports.each do |report| 
+          if report.total_time 
+             salary.current_balance += report.total_time 
+          else 
+             salary.current_balance += 0 
+          end 
+        end
+
+        @salary_unpaid_reports = salary.user.reports.where("paid = ?", true)
+        @salary_unpaid_reports.each do |report| 
+          if report.total_time 
+             salary.total_balance += report.total_time 
+          else 
+             salary.total_balance += 0 
+          end 
+        end
+
+        salary.current_balance = (salary.current_balance * salary.user.rank.counter).round(2)
+        salary.total_balance = (salary.total_balance * salary.user.rank.counter).round(2)
+        salary.save
   end
 
   def submit_salary

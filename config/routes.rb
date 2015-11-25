@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   post 'show_stat' => "users#show_stat"
 
   post 'submit_salary' => "salaries#submit_salary"
-
+  post 'submit_salary' => "salaries#submit_salary"
 
   resources :projects
 
