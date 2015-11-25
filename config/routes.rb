@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   post 'down_rank' => "users#down_rank"
   post 'up_rank' => "users#up_rank"
 
+  post 'current_balance' => "salaries#index"
+  post 'total_balance' => "salaries#total_balance"
 
   post 'make_admin' => "users#make_admin"
   post 'make_user' => "users#back_to_user"

@@ -14,6 +14,8 @@ class SalariesController < ApplicationController
       })
     end
 
+   
+
    @chart = Fusioncharts::Chart.new({
   :height => 400,
   :width => 1140,
@@ -45,10 +47,56 @@ class SalariesController < ApplicationController
     },
     :data => @salary_data
   }
-})
+})  
+
+   
 
   end
 
+  def total_balance
+  my_salary()
+  @salaries = Salary.all
+     @salary_total_data = []
+    @salaries.each do |salary|
+      @salary_total_data.push({
+        :label => salary.user.first_name + " " + salary.user.last_name,
+        :value => salary.total_balance
+      })
+    end
+
+  @chart = Fusioncharts::Chart.new({
+  :height => 400,
+  :width => 1140,
+  :id => 'chart2',
+  :type => 'column2d',
+  :renderAt => 'chart-container',
+  :dataSource => {
+    :chart => {
+      :caption => "Total Users Balance",
+      :xAxisName => "Users",
+      :yAxisName => "Value",
+      :numberPrefix => "$",
+      :paletteColors => "#0075c2",
+      :bgColor => "#ffffff",
+      :borderAlpha => "20",
+      :canvasBorderAlpha => "0",
+      :usePlotGradientColor => "0",
+      :plotBorderAlpha => "10",
+      :placevaluesInside => "1",
+      :rotatevalues => "1",
+      :valueFontColor => "#ffffff",
+      :showXAxisLine => "1",
+      :xAxisLineColor => "#999999",
+      :divlineColor => "#999999",
+      :divLineDashed => "1",
+      :showAlternateHGridColor => "0",
+      :subcaptionFontBold => "0",
+      :subcaptionFontSize => "14"
+    },
+    :data => @salary_total_data
+  }
+})
+  end
 
 
   def show
@@ -134,6 +182,7 @@ class SalariesController < ApplicationController
   end
 
   def submit_salary
+    
     @salary = Salary.where("id = ?", params[:salary_id]).first
     @salary_user = @salary.user_id
     @salary_user_reports = Report.where("user_id = ?", @salary_user)
@@ -142,6 +191,20 @@ class SalariesController < ApplicationController
       report.paid = true
       report.save
     end
+
+    @salary.total_balance = 0
+    @salary_unpaid_reports = @salary.user.reports.where("paid = ?", true)
+    @salary_unpaid_reports.each do |report| 
+      if report.total_time 
+         @salary.total_balance += report.total_time 
+      else 
+         @salary.total_balance += 0 
+      end 
+    end
+      @salary.current_balance = 0
+      @salary.total_balance = (@salary.total_balance * @salary.user.rank.counter).round(2)
+    @salary.save
+
     redirect_to :back
   end
 
