@@ -24,7 +24,7 @@
 
   <div class="form-group">
       <label class="col-lg-2 control-label">Date</label>
-      <div class="col-lg-3">
+      <div class="col-lg-6">
         <input type="text" class='datepicker form-control'>
       </div>
     </div>
@@ -43,18 +43,17 @@
       </div>
     </div>
   </div>
-
   
   <div class="form-group">
     <%= f.label :project_id, class: "col-lg-2 control-label" %>
-    <div class="col-lg-3">
+    <div class="col-lg-6">
       <%= select_tag 'report[project_id]', options_from_collection_for_select(Project.where("status = ?", true), 'id', 'name'), class: "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
     <%= f.label :comment, class: "col-lg-2 control-label" %>
-    <div class="col-lg-3">
+    <div class="col-lg-6">
       <%= f.text_field :comment, class: "form-control" %>
     </div>
   </div>
@@ -82,3 +81,10 @@
   $('.datepicker').datepicker();
 
 </script>
+
+
+<style type="text/css">
+  #report_time_start_4i, #report_time_start_5i, #report_time_end_4i, #report_time_end_5i{
+    margin-top: 5px;
+  }
+</style>
