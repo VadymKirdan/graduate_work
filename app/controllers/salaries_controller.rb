@@ -208,6 +208,7 @@ class SalariesController < ApplicationController
         salary.current_balance = (salary.current_balance * salary.user.rank.counter).round(2)
         salary.total_balance = (salary.total_balance * salary.user.rank.counter).round(2)
         salary.save
+      end
   end
 
   def submit_salary
