@@ -23,9 +23,10 @@ Rails.application.routes.draw do
   post 'make_admin' => "users#make_admin"
   post 'make_user' => "users#back_to_user"
 
-  post 'show_stat' => "users#show_stat"
+  get 'show_week' => "users#show_week"
+  get 'show_month' => "users#show_month"
+  get 'show_year' => "users#show_year"
 
-  post 'submit_salary' => "salaries#submit_salary"
   post 'submit_salary' => "salaries#submit_salary"
 
   resources :projects

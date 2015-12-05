@@ -1,0 +1,8 @@
+<ul class="nav navbar-nav">
+  <li><%= link_to 'Week', { :action => "show_week", :controller => "users"}, class: "btn btn-default"%></li>
+  <li><%= link_to 'Month', { :action => "show_month", :controller => "users"}, class: "btn btn-default"%></li>
+  <li><%= link_to 'Year', { :action => "show_year", :controller => "users"}, class: "btn btn-default"%></li>
+</ul>
+<br><br><br>
+
+<div id="chart-container"><%= @chart2.render() %></div>
